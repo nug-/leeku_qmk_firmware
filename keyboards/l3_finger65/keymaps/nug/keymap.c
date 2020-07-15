@@ -1,12 +1,13 @@
+// Default layer for L3 Finger65 (TX65)
 #include QMK_KEYBOARD_H
 
-#define ______ KC_TRNS
 #define LT_L1SP LT(_L1, KC_SPC) /* SPACE on tap, LAYER ONE on hold */
 
 enum layers {
   _L0 = 0,
   _L1,
-  _L2,
+  _L2, /* Gaming layer */
+  _L3, /* RESET layer */
 };
 
 typedef struct {
@@ -22,7 +23,7 @@ enum {
 
 //Tap dance enums
 enum {
-  T_CAPS = 0,
+  TCAP = 0,
 };
 
 int cur_dance (qk_tap_dance_state_t *state);
@@ -47,25 +48,32 @@ void x_reset (qk_tap_dance_state_t *state, void *user_data);
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_L0] = KEYMAP(
-    KC_GESC,    KC_1,    KC_2,    KC_3,    KC_4,   KC_5,    KC_6,    KC_7,    KC_8,     KC_9,    KC_0, KC_MINS,  KC_EQL,   KC_NO, KC_BSPC, KC_HOME,
-     KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,   KC_T,    KC_Y,    KC_U,    KC_I,     KC_O,    KC_P, KC_LBRC, KC_RBRC, KC_BSLS, KC_PGUP,
- TD(T_CAPS),    KC_A,    KC_S,    KC_D,    KC_F,   KC_G,    KC_H,    KC_J,    KC_K,     KC_L, KC_SCLN, KC_QUOT,   KC_NO,  KC_ENT, KC_PGDN,
-    KC_LSFT,   KC_NO,    KC_Z,    KC_X,    KC_C,   KC_V,    KC_B,    KC_N,    KC_M,  KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,   KC_UP,  KC_END,
-    KC_LCTL, KC_LGUI, KC_LALT,   KC_NO, LT_L1SP,  KC_NO, KC_RALT, KC_RCTL, KC_LEFT,  KC_DOWN, KC_RGHT),
+    KC_GESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_NO,   KC_BSPC, KC_HOME,
+    KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,          KC_PGUP,
+    TD(TCAP), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NO,   KC_ENT,           KC_PGDN,
+    KC_LSFT,  KC_NO,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,          KC_UP,   KC_END,
+    KC_LCTL,  KC_LGUI, KC_LALT, KC_NO,                     LT_L1SP, KC_NO,   KC_RALT, KC_RCTL,                            KC_LEFT, KC_DOWN, KC_RGHT),
   
   [_L1] = KEYMAP(
-     KC_GRV,   KC_F1,   KC_F2,   KC_F3,   KC_F4,  KC_F5,   KC_F6,   KC_F7,   KC_F8,    KC_F9,  KC_F10,  KC_F11,  KC_F12,   KC_NO,  KC_DEL, KC_DEL,
-     ______,  ______,   KC_UP,  ______,  ______, ______,  ______,  ______, KC_PGUP,   ______,  ______,  ______,  ______,  KC_INS,  KC_INS,
-     ______, KC_LEFT, KC_DOWN, KC_RGHT,  ______, ______,  ______, KC_HOME, KC_PGDN,   KC_END,  ______,  ______,   KC_NO,  ______, KC_PSCR,
-     ______,   KC_NO,  ______,  ______,  ______, ______,  ______,  ______,  ______,   ______,  ______,  ______,  ______, KC_PGUP,  KC_DEL,
-     ______,  ______,  ______,   KC_NO,  ______,  KC_NO,  ______,  ______, KC_HOME,  KC_PGDN,  KC_END),
+    KC_GRV,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NO,   KC_DEL,  KC_DEL,
+    _______,  _______, KC_UP,   _______, _______, _______, _______, _______, KC_PGUP, _______, _______, _______, _______, KC_INS,           KC_INS,
+    _______,  KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, KC_HOME, KC_PGDN, KC_END,  _______, _______, KC_NO,   _______,          KC_PSCR,
+    _______,  KC_NO,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_PGUP, KC_DEL,
+    _______,  _______, _______, KC_NO,                     _______, KC_NO,   _______, _______,                            KC_HOME, KC_PGDN, KC_END),
 
   [_L2] = KEYMAP(
-    KC_GESC,    KC_1,    KC_2,    KC_3,    KC_4,   KC_5,    KC_6,    KC_7,    KC_8,     KC_9,    KC_0, KC_MINS,  KC_EQL,   KC_NO, KC_BSPC, KC_HOME,
-     KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,   KC_T,    KC_Y,    KC_U,    KC_I,     KC_O,    KC_P, KC_LBRC, KC_RBRC, KC_BSLS, KC_PGUP,
-     ______,    KC_A,    KC_S,    KC_D,    KC_F,   KC_G,    KC_H,    KC_J,    KC_K,     KC_L, KC_SCLN, KC_QUOT,   KC_NO,  KC_ENT, KC_PGDN,
-    KC_LSFT,   KC_NO,    KC_Z,    KC_X,    KC_C,   KC_V,    KC_B,    KC_N,    KC_M,  KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,   KC_UP,  KC_END,
-    KC_LCTL,   KC_NO, KC_LALT,   KC_NO,  KC_SPC,  KC_NO, KC_RALT, KC_RCTL, KC_LEFT,  KC_DOWN, KC_RGHT),
+    KC_GESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_NO,   KC_BSPC, KC_HOME,
+    KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,          KC_PGUP,
+    _______,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NO,   KC_ENT,           KC_PGDN,
+    KC_LSFT,  KC_NO,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,          KC_UP,   KC_END,
+    KC_LCTL,  KC_NO,   KC_LALT, KC_NO,                     KC_SPC,  KC_NO,   KC_RALT, KC_RCTL,                            KC_LEFT, KC_DOWN, KC_RGHT),
+
+  [_L3] = KEYMAP(
+    RESET,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,            KC_NO,
+    _______,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,            KC_NO,
+    KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,            KC_NO,   KC_NO,
+    KC_NO,    KC_NO,   KC_NO,   KC_NO,                     KC_NO,   KC_NO,   KC_NO,   KC_NO,                              KC_NO,   KC_NO,   KC_NO),
 };
 
 int cur_dance (qk_tap_dance_state_t *state) {
@@ -115,7 +123,7 @@ void x_reset (qk_tap_dance_state_t *state, void *user_data) {
 }
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [T_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset)
+  [TCAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset)
 };
 
 uint32_t layer_state_set_user(uint32_t state) {

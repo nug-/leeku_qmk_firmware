@@ -19,6 +19,7 @@ enum {
   SINGLE_TAP = 1,
   SINGLE_HOLD,
   DOUBLE_TAP,
+  TRIPLE_TAP,
 };
 
 //Tap dance enums
@@ -84,7 +85,10 @@ int cur_dance (qk_tap_dance_state_t *state) {
   else if (state->count == 2) {
     return DOUBLE_TAP;
   }
-  else return 4; //magic number. At some point this method will expand to work for more presses
+  else if (state->count == 3) {
+    return TRIPLE_TAP;
+  }
+  else return 5; //magic number. At some point this method will expand to work for more presses
 }
 
 //instanalize an instance of 'tap' for the 'x' tap dance.
@@ -102,8 +106,11 @@ void x_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_HOLD: 
       layer_on(1); 
       break;
-    case DOUBLE_TAP: 
+    case DOUBLE_TAP: /*toggle gaming layer*/
       layer_invert(2); 
+      break;
+    case TRIPLE_TAP: /*toggle reset layer*/
+      layer_invert(3); 
       break;
   }
 }
@@ -117,6 +124,8 @@ void x_reset (qk_tap_dance_state_t *state, void *user_data) {
       layer_off(1); 
       break;
     case DOUBLE_TAP: 
+      break;
+    case TRIPLE_TAP: 
       break;
   }
   xtap_state.state = 0;

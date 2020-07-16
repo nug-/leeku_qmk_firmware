@@ -8,7 +8,7 @@
 #undef TAPPING_TOGGLE
 #undef RGBLIGHT_SLEEP
 #define TAPPING_TOGGLE 2
-#define TAPPING_TERM 150
+#define TAPPING_TERM 175
 #define RGBLIGHT_SLEEP
 
 #endif

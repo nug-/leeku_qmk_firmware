@@ -1,5 +1,5 @@
 # README
-This is an outdated version of QMK firmware which supports Leeku L3 PCBs (Finger 60, 65, TKL).
+## This is an outdated version of QMK firmware which supports Leeku L3 PCBs (Finger 60, 65, TKL).
 
 # Quantum Mechanical Keyboard Firmware
 

@@ -44,7 +44,7 @@ void rgb_off(void)
 void rgb_on(void)
 {
 #ifndef RGB_LEDS_NOT_SOLDERED
-  tinycmd_rgb_all(1, 0, 0, 250, true);
+  tinycmd_rgb_all(1, 255, 255, 255, true);
 #endif
 }
 

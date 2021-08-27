@@ -137,3 +137,8 @@ uint32_t layer_state_set_user(uint32_t state) {
   }
   return state;
 }
+
+void keyboard_post_init_user(void) {
+  // Call the post init code.
+  rgb_off();
+}

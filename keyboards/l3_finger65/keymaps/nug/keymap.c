@@ -20,6 +20,7 @@ enum {
   SINGLE_TAP = 1,
   SINGLE_HOLD,
   DOUBLE_TAP,
+  DOUBLE_HOLD,
 };
 
 //Tap dance enums
@@ -76,7 +77,8 @@ int cur_dance (qk_tap_dance_state_t *state) {
     else return SINGLE_HOLD;
   }
   else if (state->count == 2) {
-    return DOUBLE_TAP;
+    if (state->interrupted || !state->pressed) return DOUBLE_TAP;
+    else return DOUBLE_HOLD;
   }
   else return 4; //magic number. At some point this method will expand to work for more presses
 }
@@ -99,6 +101,9 @@ void x_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP: /*toggle gaming layer*/
       layer_invert(2); 
       break;
+    case DOUBLE_HOLD: 
+      register_code(KC_LGUI); 
+      break;
   }
 }
 
@@ -111,6 +116,9 @@ void x_reset (qk_tap_dance_state_t *state, void *user_data) {
       layer_off(1); 
       break;
     case DOUBLE_TAP: 
+      break;
+    case DOUBLE_HOLD: 
+      unregister_code(KC_LGUI); 
       break;
   }
   xtap_state.state = 0;

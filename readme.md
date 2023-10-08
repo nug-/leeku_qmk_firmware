@@ -19,3 +19,4 @@ mkdir -p ./lib/googletest
 mkdir -p ./lib/ugfx
 make l3_finger65:nug
 ```
+There may be some errors after running `make l3_finger65:nug` but the hex seems to compile okay.

@@ -9,6 +9,7 @@ Repo must be cloned into a Windows directory (e.g., /mnt/c/) when using WSL
 
 ```
 git clone https://github.com/nug-/qmk_firmware-leeku.git
+git remote set-url origin git@github.com:nug-/qmk_firmware-leeku.git
 cd qmk_firmware-leeku
 git submodule init
 git submodule update
